@@ -12,13 +12,6 @@ public class BallController : MonoBehaviour
     private float minBaseSpeed = 5f;
     private float maxBaseSpeed = 7f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(transform.right * movementSpeedX * Time.deltaTime + transform.up * movementSpeedY * Time.deltaTime);
@@ -45,15 +38,13 @@ public class BallController : MonoBehaviour
         {
             movementSpeedX = 0;
             movementSpeedY = 0;
-            GameController.instance.IncreasePlayerTwoScore();
-            GameController.instance.EndRound();
+            GameManager.GetInstance().IncreasePlayerTwoScore();
         }
         else if (collision.gameObject.tag == "RightGoal")
         {
             movementSpeedX = 0;
             movementSpeedY = 0;
-            GameController.instance.IncreasePlayerOneScore();
-            GameController.instance.EndRound();
+            GameManager.GetInstance().IncreasePlayerOneScore();
         }
     }
 }

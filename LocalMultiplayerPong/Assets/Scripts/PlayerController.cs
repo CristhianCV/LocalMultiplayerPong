@@ -15,13 +15,6 @@ public class PlayerController : MonoBehaviour
         movementVector = context.ReadValue<Vector2>().normalized;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    //Update is called once per frame
     void Update()
     {
         float deltaY = movementVector.y * movementSpeed * Time.deltaTime;
