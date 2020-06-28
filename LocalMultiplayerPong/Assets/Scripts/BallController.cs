@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     [SerializeField] private float movementSpeedRaise;
+    [SerializeField] private ParticleSystem explosionEffect;
 
     private float movementSpeedX;
     private float movementSpeedY;
@@ -38,13 +39,21 @@ public class BallController : MonoBehaviour
         {
             movementSpeedX = 0;
             movementSpeedY = 0;
+            CreateExplosion();
             GameManager.GetInstance().IncreasePlayerTwoScore();
         }
         else if (collision.gameObject.tag == "RightGoal")
         {
             movementSpeedX = 0;
             movementSpeedY = 0;
+            CreateExplosion();
             GameManager.GetInstance().IncreasePlayerOneScore();
         }
+    }
+
+    private void CreateExplosion()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        explosionEffect.Play();
     }
 }

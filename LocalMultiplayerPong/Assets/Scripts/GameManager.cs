@@ -15,22 +15,22 @@ public class GameManager : Singleton<GameManager>
 
     public void StartGame()
     {
-        playerOneScore = 0;
-        UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerOneScoreText", playerOneScore.ToString());
-        playerTwoScore = 0;
-        UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerTwoScoreText", playerTwoScore.ToString());
-        isPlaying = false;
         SceneManager.LoadScene("Game");
-        UIManager.GetInstance().SwitchUI(UIType.Gameplay);
+        playerOneScore = 0;
+        playerTwoScore = 0;
+        isPlaying = false;
+        UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerOneScoreText", playerOneScore.ToString());
+        UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerTwoScoreText", playerTwoScore.ToString());
         UIManager.GetInstance().ActiveteObject(UIType.Gameplay, "StartRoundText", true);
+        UIManager.GetInstance().SwitchUI(UIType.Gameplay);
     }
 
     public void StartRound(InputAction.CallbackContext context)
     {
         if (context.performed && !isPlaying)
         {
-            UIManager.GetInstance().ActiveteObject(UIType.Gameplay, "StartRoundText", false);
             isPlaying = true;
+            UIManager.GetInstance().ActiveteObject(UIType.Gameplay, "StartRoundText", false);
             FindObjectOfType<BallController>().AddSpeed();
         }
     }
@@ -47,14 +47,14 @@ public class GameManager : Singleton<GameManager>
         if (playerOneScore == roundsToWin)
         {
             SceneManager.LoadScene("GameOver");
-            UIManager.GetInstance().SwitchUI(UIType.GameOver);
             UIManager.GetInstance().ChangeText(UIType.GameOver, "WinnerText", "PLAYER 1 WIN");
+            UIManager.GetInstance().SwitchUI(UIType.GameOver);
         }
         else if (playerTwoScore == roundsToWin)
         {
             SceneManager.LoadScene("GameOver");
-            UIManager.GetInstance().SwitchUI(UIType.GameOver);
             UIManager.GetInstance().ChangeText(UIType.GameOver, "WinnerText", "PLAYER 2 WIN");
+            UIManager.GetInstance().SwitchUI(UIType.GameOver);
         }
         else
         {
