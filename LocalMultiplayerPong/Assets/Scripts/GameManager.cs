@@ -12,9 +12,22 @@ public class GameManager : Singleton<GameManager>
     private int roundsToWin = 3;
 
     private bool isPlaying = false;
+    public bool isVSPlayer = false;
+
+    public void StartGameVSCPU()
+    {
+        StartGame();
+    }
+
+    public void StartGameVSPlayer()
+    {
+        StartGame();
+        isVSPlayer = true;
+    }
 
     public void StartGame()
     {
+        UIManager.GetInstance().SwitchUI(UIType.Gameplay);
         SceneManager.LoadScene("Game");
         playerOneScore = 0;
         playerTwoScore = 0;
@@ -22,7 +35,6 @@ public class GameManager : Singleton<GameManager>
         UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerOneScoreText", playerOneScore.ToString());
         UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerTwoScoreText", playerTwoScore.ToString());
         UIManager.GetInstance().ActiveteObject(UIType.Gameplay, "StartRoundText", true);
-        UIManager.GetInstance().SwitchUI(UIType.Gameplay);
     }
 
     public void StartRound(InputAction.CallbackContext context)
@@ -75,5 +87,15 @@ public class GameManager : Singleton<GameManager>
         playerTwoScore += 1;
         UIManager.GetInstance().ChangeText(UIType.Gameplay, "PlayerTwoScoreText", playerTwoScore.ToString());
         EndRound();
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+          Application.Quit();
+         Debug.Log("Game is exiting");
+#endif 
     }
 }

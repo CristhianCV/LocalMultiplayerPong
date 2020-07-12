@@ -72,4 +72,9 @@ public class UIManager : Singleton<UIManager>
         }
         objectTransform.gameObject.GetComponent<Text>().text = text;
     }
+
+    public void ShowModeMenu()
+    {
+        SwitchUI(UIType.ModeMenu);
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public enum UIType
 {
     MainMenu,
+    ModeMenu,
     Gameplay,
     GameOver
 }
